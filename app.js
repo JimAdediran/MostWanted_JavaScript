@@ -193,8 +193,9 @@ function chars(input) {
 
 function findPersonFamily(person, people) {
     let personFamily = `Family members of ${person.firstName} ${person.lastName} are: \n`
+    personFamily += findPersonSiblings(person, people)
     personFamily += findPersonSpouse(person, people)
-
+    personFamily += findPersonPaernts(person, people)
     return personFamily
 }
 
