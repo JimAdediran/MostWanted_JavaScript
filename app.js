@@ -195,15 +195,15 @@ function findPersonFamily(person, people) {
     let personFamily = `Family members of ${person.firstName} ${person.lastName} are: \n`
     personFamily += findPersonSiblings(person, people)
     personFamily += findPersonSpouse(person, people)
-    personFamily += findPersonPaernts(person, people)
+   
     return personFamily
 }
 
 
 function findPersonSiblings(person, people){
     let foundSiblings = ""
-    let siblings = people.fliter(function(el){
-    if (person.id != el.id && person.parents.includes(el.parents[0]) || person.parents.includes(el.parents[1])){
+    let siblings = people.filter(function(el){
+    if (person.id != el.id && (person.parents.includes(el.parents[0]) || person.parents.includes(el.parents[1]))) {
         return true;
     }
     else {
@@ -215,11 +215,11 @@ function findPersonSiblings(person, people){
     let siblingArray = siblings.map(function(el) {
         return `${el.firstName} ${el.lastName}`
     })
-    if(foundSiblings.length === 0){
-        return `No siblings found`
+    if(siblings.length === 0){
+        return `\nNo siblings found`
     }
     else{
-        foundSiblings += `\n Siblings: ${siblingArray}`
+        return foundSiblings += `\n Siblings: ${siblingArray}`
     }
 }
 
@@ -237,10 +237,11 @@ function findPersonSpouse(person, people){
         return false}
         })
     if (spouse.length == 0){
-        foundSpouse += `This person does not have a spouse`
+        foundSpouse += `\nThis person does not have a spouse`
         return foundSpouse
     }
     else{foundSpouse += `\n Spouse: ${spouse[0].firstName} ${spouse[0].lastName}`;
     }
         return foundSpouse
     }
+
