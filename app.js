@@ -190,3 +190,12 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+function findPersonFamily() {
+    let foundFamily = people.filter(function(person){
+    if (person.firstName === firstName && person.lastName === lastName) { 
+        return true;
+    }
+});
+return foundFamily
+}
