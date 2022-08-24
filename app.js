@@ -195,10 +195,9 @@ function findPersonFamily(person, people) {
     let personFamily = `Family members of ${person.firstName} ${person.lastName} are: \n`
     personFamily += findPersonSiblings(person, people)
     personFamily += findPersonSpouse(person, people)
-   
+    personFamily += findPersonParents(person, people)
     return personFamily
 }
-
 
 function findPersonSiblings(person, people){
     let foundSiblings = ""
@@ -211,37 +210,55 @@ function findPersonSiblings(person, people){
     }
 })
 
-
     let siblingArray = siblings.map(function(el) {
         return `${el.firstName} ${el.lastName}`
     })
     if(siblings.length === 0){
-        return `\nNo siblings found`
+        return `\nNo siblings found`;
     }
     else{
-        return foundSiblings += `\n Siblings: ${siblingArray}`
+        return foundSiblings += `\n Siblings: ${siblingArray}`;
     }
 }
-
-
-
 
 
 function findPersonSpouse(person, people){    
     let foundSpouse = ""
     let spouse = people.filter(function(el){
         if (person.currentSpouse === el.id){
-        return true
+        return true;
     }
         else {
-        return false}
+        return false;}
         })
     if (spouse.length == 0){
         foundSpouse += `\nThis person does not have a spouse`
-        return foundSpouse
+        return foundSpouse;
     }
     else{foundSpouse += `\n Spouse: ${spouse[0].firstName} ${spouse[0].lastName}`;
+    
+        return foundSpouse;
     }
-        return foundSpouse
-    }
+}
 
+function findPersonParents(person, people){
+    let foundParents = ""
+    let parents = people.filter(function(el){
+        if(person.parents[0] === el.id || person.parents[1] === el.id){
+            return true;
+        }
+        else{
+            return false;
+        }
+    })
+    let parentArray = parents.map(function(el){
+        return `${el.firstName} ${el.lastName}`    
+    })
+    if (parents.length == 0){
+        foundParents += `\nNo parents found`
+        return foundParents
+    }
+    else {
+        return foundParents += `\nParents: ${parentArray}`
+}
+}
