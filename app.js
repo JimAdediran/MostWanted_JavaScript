@@ -279,13 +279,21 @@ function findPersonDescendants(person, people){
     }
     return personKid;
   }
-function searchByTraits(person, people)
-  let singleVsMultiple = prompt("Would you like to search for a single trait or mulitple traits?")
 
-  if (singleVsMultiple === "single"){
-
-  }
-if(singleVsMultiple === "multiple"){
-    
+function searchByTraits(people){
+    let messageDisplay = prompt(`To search for a single trait select 1, to search for mulitple traits select 2`)
+    switch(messageDisplay){
+        case 1:
+            singleTrait(people)
+            break
+        case 2:
+            multipleTraits(people)
+            break
+        default:
+            return searchByTraits(people)
+    }
 }
 
+function singleTrait(people)
+
+funciton multipleTraits(people)
