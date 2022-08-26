@@ -294,32 +294,40 @@ function searchByTraits(people){
     }
 }
 
-function singleTrait(people)
+function singleTrait(people){
     let foundPeople;
     let messageDisplay = prompt(`To search please enter their gender, dob, height, weight, or eyecolor?`);
 
     switch(messageDisplay){
         case gender:
             let gender = prompt("What is the gender of the person?/nGenders: male or female")
-            foundPeople = displayPeople(people, gender)
+            foundPeople = displayPeople(personTrait(people, gender))
             break
         case dob:
             let dob = prompt("What is the date of birth of this person?")
-            foundPeople = displayPeople(people, dob)
+            foundPeople = displayPeople(personTrait(people, dob))
             break
         case height:
             let height = prompt("What is the height in inches of the person?")
+            foundPeople = displayPeople(personTrait(people, height))
         case weight:
+            let weight = prompt("What is the weight in pounds of the person?")
+            foundPeople = displayPeople(personTrait(people, weight))
         case eyeColor:
-
-    }
+            let eyeColor = prompt("What is the eyecolor of the person?")
+            foundPeople = displayPeople(personTrait(people, eyeColor))
+        default:
+            return searchByTraits
+        }
+        return foundPeople
+}
 
 
 function multipleTraits(people)
 
 function personTrait(people, trait){
     let personTrait = people.filter(function (el) {
-        if (person.gender == trait || person.dob || person.height || person.weight || person.eyeColor){
+        if (person.gender == trait || person.dob == trait || person.height == trait || person.weight == trait || person.eyeColor == trait){
             return true
         }
     })
