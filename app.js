@@ -281,55 +281,120 @@ function findPersonDescendants(person, people){
   }
 
 function searchByTraits(people){
-    let messageDisplay = prompt(`To search for a single trait select 1, to search for mulitple traits select 2`)
-    switch(messageDisplay){
-        case 1:
-            singleTrait(people)
-            break
-        case 2:
-            multipleTraits(people)
-            break
-        default:
-            return searchByTraits(people)
+    let messageDisplay = prompt(`To search for a single trait enter 1 to search for mulitple traits enter 2`)
+    while(messageDisplay !=="1" && messageDisplay !=="2"){
+    messageDisplay = prompt(`To search for a single trait enter 1 to search for mulitple traits enter 2`)
+    }
+    if(messageDisplay == 1){
+    let messageQuestion = prompt( "Which trait would you like to search for: gender, DOB, height, weight, eyecolor?"
+    ).toLowerCase();
+    while (
+      messageQuestion !== "gender" && messageQuestion !== "dob" && messageQuestion !== "height" && messageQuestion !== "weight" && messageQuestion !== "eyecolor") 
+      {
+      messageQuestion = prompt(
+        "Entry is invalid.\nWhich trait would you like to search for: gender, DOB, height, weight, eyecolor?"
+      ).toLowerCase();
+    }
+    if (messageQuestion == "gender"){
+        let userInput = prompt(`Which gender do you want to search for: "male" or "female"?`)
+    let genderResult = searchForGender(people, userInput)
+        return genderResult
+    }
+    else if (messageQuestion == "dob"){
+        let userInput = prompt(`What is the date of birth of the person?`)
+        let dobResult = searchForDob(people, userInput)
+        return dobResult
+    }
+    else if (messageQuestion == "height"){
+        let userInput = prompt(`What is the height of the person?`)
+        let heightResult = searchForHeight(people, userInput)
+        return heightResult
+    }
+    else if (messageQuestion == "weight"){
+        let userInput = prompt(`What is the weight of the person?`)
+        let weightResult = searchForWeight(people, userInput)
+        return weightResult
+    }
+    else if (messageQuestion == "eyecolor"){
+        let userInput = prompt(`What is the eyecolor of the person?`)
+        let eyecolorResult = searchForEyecolor(people, userInput)
+        return eyecolorResult
     }
 }
-
-function singleTrait(people){
-    let foundPeople;
-    let messageDisplay = prompt(`To search please enter their gender, dob, height, weight, or eyecolor?`);
-
-    switch(messageDisplay){
-        case gender:
-            let gender = prompt("What is the gender of the person?/nGenders: male or female")
-            foundPeople = displayPeople(personTrait(people, gender))
-            break
-        case dob:
-            let dob = prompt("What is the date of birth of this person?")
-            foundPeople = displayPeople(personTrait(people, dob))
-            break
-        case height:
-            let height = prompt("What is the height in inches of the person?")
-            foundPeople = displayPeople(personTrait(people, height))
-        case weight:
-            let weight = prompt("What is the weight in pounds of the person?")
-            foundPeople = displayPeople(personTrait(people, weight))
-        case eyeColor:
-            let eyeColor = prompt("What is the eyecolor of the person?")
-            foundPeople = displayPeople(personTrait(people, eyeColor))
-        default:
-            return searchByTraits
-        }
-        return foundPeople
-}
-
-
-function multipleTraits(people)
-
-function personTrait(people, trait){
-    let personTrait = people.filter(function (el) {
-        if (person.gender == trait || person.dob == trait || person.height == trait || person.weight == trait || person.eyeColor == trait){
-            return true
-        }
+function searchForGender(people, choice){
+    let gender = people.filter(function (el){
+        if(el.gender == choice)
+        return true
     })
-    return personTrait
+    if(gender !== 0){
+    let result = gender.map(function (el){
+        return `${el.firstName} ${el.lastName}\n`
+    }) 
+        alert(result)
+        return gender
+    }
 }
+function searchForDob(people, choice){
+    let dob = people.filter(function (el){
+        if(el.dob == choice)
+        return true
+    })
+    if(dob !== 0){
+    let result = dob.map(function (el){
+        return `${el.firstName} ${el.lastName}\n`
+    }) 
+        alert(result)
+        return dob
+    }
+        else{
+            alert(`No matches found`)
+    }
+}
+function searchForHeight(people, choice){
+    let height = people.filter(function (el){
+        if(el.height == choice)
+        return true
+    })
+    if(height !== 0){
+    let result = height.map(function (el){
+        return `${el.firstName} ${el.lastName}\n`
+    }) 
+        alert(result)
+        return height
+    }
+        else{
+            alert(`No matches found`)
+    }
+}
+function searchForWeight(people, choice){
+    let weight = people.filter(function (el){
+        if(el.weight == choice)
+        return true
+    })
+    if(weight !== 0){
+    let result = weight.map(function (el){
+        return `${el.firstName} ${el.lastName}\n`
+    }) 
+        alert(result)
+        return weight
+    }
+        else{
+            alert(`No matches found`)
+    }
+}
+function searchForEyecolor(people, choice){
+    let eyecolor = people.filter(function (el){
+        if(el.eyeColor == choice)
+        return true
+    })
+    if(eyecolor !== 0){
+    let result = eyecolor.map(function (el){
+        return `${el.firstName} ${el.lastName}\n`
+    }) 
+        alert(result)
+        return height
+    }
+        else{
+            alert(`No matches found`)
+    }
+}}
