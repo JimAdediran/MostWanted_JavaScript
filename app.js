@@ -285,7 +285,7 @@ function searchByTraits(people){
     while(messageDisplay !=="1" && messageDisplay !=="2"){
     messageDisplay = prompt(`To search for a single trait enter 1 to search for mulitple traits enter 2`)
     }
-    if(messageDisplay == 1){
+    if(messageDisplay == "1"){
     let messageQuestion = prompt( "Which trait would you like to search for: gender, DOB, height, weight, eyecolor?"
     ).toLowerCase();
     while (
@@ -306,12 +306,12 @@ function searchByTraits(people){
         return dobResult
     }
     else if (messageQuestion == "height"){
-        let userInput = prompt(`What is the height of the person?`)
+        let userInput = prompt(`What is the height of the person in inches?`)
         let heightResult = searchForHeight(people, userInput)
         return heightResult
     }
     else if (messageQuestion == "weight"){
-        let userInput = prompt(`What is the weight of the person?`)
+        let userInput = prompt(`What is the weight of the person in pounds?`)
         let weightResult = searchForWeight(people, userInput)
         return weightResult
     }
@@ -321,6 +321,36 @@ function searchByTraits(people){
         return eyecolorResult
     }
 }
+    if(messageDisplay == "2"){
+        let multipleSelections = prompt(`What traits would you like to search for: gender, dob, height, weight, eyecolor (no spaces)`
+        ).toLowerCase().split(',')
+        for (let i = 0; i < multipleSelections.length; i++){
+            if (multipleSelections[i] == "gender"){
+              let traits = prompt(`Which gender do you want to search for: "male" or "female"?`)
+              let foundResults = searchForGender(people, traits)
+            } else if (multipleSelections[i] == "dob"){
+              let traits = prompt(`What is the date of birth of the person?`)
+              foundResults = searchForDob(people, traits)
+            } else if (multipleSelections[i] == "height"){
+              let traits = prompt(`What is the height of the person in inches?`)
+              foundResults = searchForHeight(people, traits)
+            } else if (multipleSelections[i] == "weight"){
+              let traits = prompt(`What is the weight of the person in pounds?`)
+              foundResults = searchForWeight(people, traits)
+            } else if (multipleSelections[i] == "eyecolor"){
+              let traits = prompt(`What is the eyecolor of the person?`)
+              foundResults = searchForEyecolor(people, traits)
+            }
+            }
+            if (traits !== `No matches found`){
+            return foundResults;
+            } 
+            else(
+                alert(`No matches found`)
+            )        
+    }}
+
+
 function searchForGender(people, choice){
     let gender = people.filter(function (el){
         if(el.gender == choice)
@@ -396,5 +426,4 @@ function searchForEyecolor(people, choice){
     }
         else{
             alert(`No matches found`)
-    }
-}}
+    }}
